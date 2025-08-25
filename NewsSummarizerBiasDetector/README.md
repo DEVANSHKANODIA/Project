@@ -19,13 +19,13 @@ A clean, simple news analysis tool built with HTML, CSS, vanilla JavaScript, and
 
 2. **Environment**
    ```bash
-   cp .env.example .env
+   add ur api key with variable named GEMINI_API_KEY in system variables 
    # Edit .env and add your GEMINI_API_KEY
    ```
 
 3. **Run**
    ```bash
-   npm start
+   npm run dev
    ```
 
 4. **Open** http://localhost:5000
