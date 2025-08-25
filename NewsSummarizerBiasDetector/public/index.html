@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NewsLens - AI News Analysis</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="nav">
+                <div class="logo">
+                    <div class="logo-icon">👁️</div>
+                    <h1>NewsLens</h1>
+                </div>
+                <nav class="nav-links">
+                    <a href="#how-it-works">How it Works</a>
+                    <a href="#about">About</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h2>Understand News with<span class="highlight">Clarity</span></h2>
+                <p>Paste any news article or URL to get AI-powered summaries in simple language, plus bias detection to help you understand multiple perspectives.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <div class="analysis-section">
+                
+                <!-- Input Section -->
+                <div class="input-card">
+                    <h3>Analyze News Article</h3>
+                    
+                    <!-- Input Method Toggle -->
+                    <div class="input-toggle">
+                        <button class="toggle-btn active" id="url-toggle">🔗 URL</button>
+                        <button class="toggle-btn" id="text-toggle">📝 Text</button>
+                    </div>
+
+                    <!-- URL Input -->
+                    <div class="input-section" id="url-section">
+                        <label for="url-input">Article URL</label>
+                        <div class="input-group">
+                            <input type="url" id="url-input" placeholder="https://example.com/news-article">
+                            <button class="validate-btn" id="validate-url">✓</button>
+                        </div>
+                        <p class="input-help">We'll automatically extract the article content</p>
+                    </div>
+
+                    <!-- Text Input -->
+                    <div class="input-section hidden" id="text-section">
+                        <label for="text-input">Article Text</label>
+                        <textarea id="text-input" rows="8" placeholder="Paste the full article text here..."></textarea>
+                        <div class="input-info">
+                            <span>Minimum 100 characters recommended</span>
+                            <span id="char-count">0 characters</span>
+                        </div>
+                    </div>
+
+                    <!-- Tone Selection -->
+                    <div class="tone-selection">
+                        <label>Summary Tone</label>
+                        <div class="tone-options">
+                            <button class="tone-btn active" data-tone="neutral">
+                                <div class="tone-header">
+                                    <span class="tone-icon">⚖️</span>
+                                    <strong>Neutral</strong>
+                                </div>
+                                <p>Balanced, professional summary</p>
+                            </button>
+                            <button class="tone-btn" data-tone="facts">
+                                <div class="tone-header">
+                                    <span class="tone-icon">📋</span>
+                                    <strong>Facts Only</strong>
+                                </div>
+                                <p>Key facts and figures</p>
+                            </button>
+                            <button class="tone-btn" data-tone="simple">
+                                <div class="tone-header">
+                                    <span class="tone-icon">👶</span>
+                                    <strong>Simple</strong>
+                                </div>
+                                <p>Easy to understand</p>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Analyze Button -->
+                    <button class="analyze-btn" id="analyze-btn">
+                        <span id="btn-text">🧠 Analyze Article</span>
+                        <div class="spinner hidden" id="btn-spinner"></div>
+                    </button>
+
+                    <!-- Error Message -->
+                    <div class="error-message hidden" id="error-message"></div>
+                </div>
+
+                <!-- Results Section -->
+                <div class="results-section">
+                    
+                    <!-- Loading State -->
+                    <div class="loading-card hidden" id="loading-card">
+                        <div class="loading-content">
+                            <div class="loading-spinner"></div>
+                            <h4>Analyzing Article</h4>
+                            <p>This may take a few seconds...</p>
+                            <div class="progress-bar">
+                                <div class="progress-fill"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Summary Results -->
+                    <div class="result-card hidden" id="summary-card">
+                        <div class="card-header">
+                            <h4>📄 Summary</h4>
+                            <div class="tone-badge" id="tone-badge">Neutral Tone</div>
+                        </div>
+                        <div class="summary-content" id="summary-content"></div>
+                        <div class="card-footer">
+                            <div class="reading-time">⏱️ <span id="reading-time"></span></div>
+                            <div class="action-buttons">
+                                <button class="action-btn" id="copy-summary">📋</button>
+                                <button class="action-btn" id="share-summary">🔗</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bias Analysis -->
+                    <div class="result-card hidden" id="bias-card">
+                        <div class="card-header">
+                            <h4>🔍 Bias Analysis</h4>
+                        </div>
+                        
+                        <!-- Overall Score -->
+                        <div class="bias-overall">
+                            <div class="score-header">
+                                <span>Overall Bias Level</span>
+                                <span class="bias-level" id="bias-level">Very Low</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="bias-progress"></div>
+                            </div>
+                        </div>
+
+                        <!-- Indicators -->
+                        <div class="bias-indicators" id="bias-indicators"></div>
+
+                        <!-- Recommendations -->
+                        <div class="recommendations" id="recommendations">
+                            <div class="rec-header">
+                                <span class="rec-icon">💡</span>
+                                <h5>Recommendations</h5>
+                            </div>
+                            <ul id="rec-list"></ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- How It Works -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="container">
+            <h3>How NewsLens Works</h3>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-icon">🔗</div>
+                    <h4>1. Input Article</h4>
+                    <p>Paste a URL or article text from any news source. Our AI extracts and processes the content automatically.</p>
+                </div>
+                <div class="step">
+                    <div class="step-icon">🧠</div>
+                    <h4>2. AI Analysis</h4>
+                    <p>Advanced language models analyze tone, sentiment, and potential bias while creating summaries in your preferred style.</p>
+                </div>
+                <div class="step">
+                    <div class="step-icon">📊</div>
+                    <h4>3. Clear Results</h4>
+                    <p>Get easy-to-understand summaries with bias indicators and suggestions for additional sources to consider.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <div class="logo-icon">👁️</div>
+                        <h5>NewsLens</h5>
+                    </div>
+                    <p>Empowering informed decision-making through AI-powered news analysis and bias detection.</p>
+                </div>
+                <div class="footer-links">
+                    <div class="link-group">
+                        <h6>Product</h6>
+                        <a href="#">Features</a>
+                        <a href="#">About</a>
+                    </div>
+                    <div class="link-group">
+                        <h6>Support</h6>
+                        <a href="#">Help</a>
+                        <a href="#">Contact</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 NewsLens. College Project.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

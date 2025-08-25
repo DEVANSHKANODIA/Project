@@ -1,0 +1,15 @@
+{
+  "name": "newslens",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "AI-powered news analysis tool - Simple HTML/CSS/JS version",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node server/index.js"
+  },
+  "dependencies": {
+    "@google/genai": "^1.15.0",
+    "express": "^4.21.2",
+    "cheerio": "^1.1.2"
+  }
+}
